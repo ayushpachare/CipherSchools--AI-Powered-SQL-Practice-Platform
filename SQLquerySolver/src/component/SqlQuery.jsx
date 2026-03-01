@@ -10,7 +10,7 @@ const SqlQuery = () => {
 
   const difficulty = location.state?.difficulty;
   const [questions, setQuestionsState] = useState([]);
-  // console.log(questions);
+
 
   const [currQuestion, setNewQuestion] = useState(0);
 
@@ -19,12 +19,14 @@ const SqlQuery = () => {
     setQuestionsState(stored);
   }, [currQuestion]);
 
-  React.useEffect(() => {
-    setHintText("");
-    setShowHint(false);
-    setHintLoading(false);
-    setUserQuery("");   // also clear query
-  }, [currQuestion]);
+React.useEffect(() => {
+  setHintText("");
+  setShowHint(false);
+  setHintLoading(false);
+  setUserQuery("");
+  setIsCorrect(null);
+  setLoading(false);
+}, [currQuestion]);
 
 
 
@@ -59,7 +61,7 @@ const SqlQuery = () => {
 
     const data = await res.json();
 
-    console.log("RESPONSE:", data);  // 👈 ADD THIS
+    console.log("RESPONSE:", data);
 
     setIsCorrect(data.correct);
     setLoading(false);
@@ -87,7 +89,6 @@ const SqlQuery = () => {
     });
 
     const data = await res.json();
-    // console.log("Hint response:", data);
 
     setHintText(data.hint);
     setHintLoading(false);

@@ -24,7 +24,7 @@ app.use("/api/router", router)
 
 
 const startServer = async () => {
-    await connectDB();     // wait for DB
+    await connectDB();
     app.listen(port, () => {
         console.log(`Server running on port ${port}`);
     });
